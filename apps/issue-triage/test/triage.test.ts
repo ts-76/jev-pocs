@@ -37,6 +37,8 @@ describe('issue triage rules', () => {
     };
     const comment = formatTriageComment(decision, 'not needed');
     expect(comment.startsWith('<!-- jev-issue-triage -->')).toBe(true);
+    expect(comment).toContain('<!-- jev-issue-triage -->\n## Jev triage');
+    expect(comment).not.toContain('\\n');
     expect(comment).toContain('Type: question');
   });
 });

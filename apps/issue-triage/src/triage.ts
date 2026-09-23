@@ -74,5 +74,5 @@ export function formatTriageComment(decision: TriageDecision, flueMessage: strin
     '- Flue: ' + flueMessage,
     '',
     '_This is an automated first-pass classification. Please review before taking action._',
-  ].join('\\n');
+  ].join('\n');
 }

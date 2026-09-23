@@ -9,6 +9,8 @@ TypeSafe AI の Jev を「一次判断層」として使う、2つの個人向�
 
 どちらも、Jev に副作用を持たせず、Jev の判定結果を TypeScript のルールで処理する構成です。
 
+今後の活用候補と実現性は[docs/jev-ideas.md](docs/jev-ideas.md)に記録しています。
+
 ## セットアップ
 
 pnpmコマンドはすべてリポジトリのルートから実行します。

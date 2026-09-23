@@ -1,0 +1,15 @@
+{
+  "name": "jev-pocs",
+  "private": true,
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "build": "pnpm --filter gmail-triage build && pnpm --filter issue-triage build",
+    "dev:gmail": "pnpm --filter gmail-triage dev",
+    "deploy:gmail": "pnpm --filter gmail-triage deploy",
+    "deploy:gmail:first": "pnpm --filter gmail-triage deploy:first",
+    "deploy:gmail:check": "pnpm --filter gmail-triage deploy:check",
+    "deploy:gmail:dry-run": "pnpm --filter gmail-triage build",
+    "typecheck": "pnpm --filter gmail-triage typecheck && pnpm --filter issue-triage typecheck",
+    "test": "pnpm --filter gmail-triage test && pnpm --filter issue-triage test"
+  }
+}

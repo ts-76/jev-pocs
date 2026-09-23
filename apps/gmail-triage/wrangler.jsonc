@@ -1,0 +1,36 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jev-gmail-triage",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-22",
+  "compatibility_flags": ["nodejs_compat"],
+  "secrets": {
+    "required": [
+      "GMAIL_CLIENT_ID",
+      "GMAIL_CLIENT_SECRET",
+      "GMAIL_REFRESH_TOKEN",
+      "GMAIL_REDIRECT_URI",
+      "GMAIL_PUBSUB_TOPIC",
+      "OAUTH_STATE_SECRET",
+      "RUN_TOKEN"
+    ]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "MAILBOX", "class_name": "Mailbox" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1-mailbox", "new_sqlite_classes": ["Mailbox"] }
+  ],
+  "triggers": {
+    "crons": ["*/5 * * * *", "0 3 * * *"]
+  }
+}

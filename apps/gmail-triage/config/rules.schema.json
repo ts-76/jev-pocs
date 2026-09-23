@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Gmail triage rules v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "labels", "thresholds", "rules"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "version": {"const": 1},
+    "labels": {"type": "object", "minProperties": 9, "propertyNames": {"pattern": "^[a-z][a-zA-Z0-9]*$"}, "additionalProperties": {"type": "string", "minLength": 1, "pattern": "\\S"}},
+    "thresholds": {
+      "type": "object", "additionalProperties": false,
+      "required": ["category", "requiresReply", "unsolicitedSales", "priority"],
+      "properties": {
+        "category": {"type": "number", "minimum": 0, "maximum": 1},
+        "requiresReply": {"type": "number", "minimum": 0, "maximum": 1},
+        "unsolicitedSales": {"type": "number", "minimum": 0, "maximum": 1},
+        "priority": {"type": "number", "minimum": 0, "maximum": 3}
+      }
+    },
+    "rules": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["id", "description", "when", "actions"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"},
+        "description": {"type": "string", "minLength": 1},
+        "when": {"$ref": "#/definitions/condition"},
+        "actions": {"type": "object", "additionalProperties": false, "required": ["addLabels"], "properties": {
+          "addLabels": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "ai": {"const": "skip"}
+        }}
+      }
+    }}
+  },
+  "definitions": {"condition": {"oneOf": [
+    {"type": "object", "additionalProperties": false, "required": ["all"], "properties": {"all": {"type": "array", "minItems": 1, "items": {"$ref": "#/definitions/condition"}}}},
+    {"type": "object", "additionalProperties": false, "required": ["any"], "properties": {"any": {"type": "array", "minItems": 1, "items": {"$ref": "#/definitions/condition"}}}},
+    {"type": "object", "additionalProperties": false, "required": ["field", "operator", "value"], "properties": {
+      "field": {"enum": ["from.address", "subject", "body"]},
+      "operator": {"enum": ["equals", "startsWith", "contains", "matches"]},
+      "value": {"type": "string", "minLength": 1}, "ignoreCase": {"type": "boolean"}
+    }},
+    {"type": "object", "additionalProperties": false, "required": ["field", "operator", "value"], "properties": {
+      "field": {"const": "ageDays"}, "operator": {"const": "greaterThanOrEqual"}, "value": {"type": "number", "minimum": 0}
+    }}
+  ]}}
+}

@@ -1,0 +1,68 @@
+{
+  "$schema": "./rules.schema.json",
+  "version": 1,
+  "labels": {
+    "triaged": "AI/Triaged",
+    "action": "Action Required",
+    "billing": "Billing",
+    "revenue": "Revenue",
+    "development": "Development",
+    "work": "Work",
+    "information": "Information",
+    "security": "Security",
+    "disposable": "Disposable"
+  },
+  "thresholds": {
+    "category": 0.8,
+    "requiresReply": 0.75,
+    "unsolicitedSales": 0.85,
+    "priority": 2
+  },
+  "rules": [
+    {
+      "id": "developer-notification",
+      "description": "Known developer service notification",
+      "when": {
+        "any": [
+          { "field": "from.address", "operator": "equals", "value": "notifications@github.com" },
+          { "field": "from.address", "operator": "equals", "value": "support@npmjs.com" },
+          { "field": "from.address", "operator": "equals", "value": "noreply@notify.cloudflare.com" }
+        ]
+      },
+      "actions": { "addLabels": ["development"] }
+    },
+    {
+      "id": "cloudflare-access-code",
+      "description": "Cloudflare Access login code",
+      "when": {
+        "all": [
+          { "field": "from.address", "operator": "equals", "value": "noreply@notify.cloudflare.com" },
+          { "field": "subject", "operator": "startsWith", "value": "Cloudflare Access login code for ", "ignoreCase": true }
+        ]
+      },
+      "actions": { "addLabels": ["security"], "ai": "skip" }
+    },
+    {
+      "id": "npm-published",
+      "description": "npm package publish confirmation",
+      "when": {
+        "all": [
+          { "field": "from.address", "operator": "equals", "value": "support@npmjs.com" },
+          { "field": "subject", "operator": "startsWith", "value": "Successfully published ", "ignoreCase": true }
+        ]
+      },
+      "actions": { "addLabels": ["development"], "ai": "skip" }
+    },
+    {
+      "id": "service-billing",
+      "description": "Known service billing message",
+      "when": {
+        "all": [
+          { "field": "from.address", "operator": "equals", "value": "noreply@notify.cloudflare.com" },
+          { "field": "subject", "operator": "matches", "value": "請求書|\\binvoice\\b|\\breceipt\\b|領収書|購入が確認されました", "ignoreCase": true }
+        ]
+      },
+      "actions": { "addLabels": ["billing"] }
+    }
+  ]
+}

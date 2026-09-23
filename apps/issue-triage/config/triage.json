@@ -1,0 +1,119 @@
+{
+  "$schema": "./triage.schema.json",
+  "version": 1,
+  "model": "typesafe/jev",
+  "thresholds": {
+    "needsRepoInvestigation": 0.65,
+    "hasEnoughInformation": 0.55
+  },
+  "issueTypes": {
+    "bug": {
+      "label": "triage:bug",
+      "color": "d73a4a",
+      "description": "Jev classified this as a bug",
+      "criteria": "An existing behavior does not work as intended."
+    },
+    "feature": {
+      "label": "triage:feature",
+      "color": "a2eeef",
+      "description": "Jev classified this as a feature request",
+      "criteria": "A request for a new feature or product improvement."
+    },
+    "question": {
+      "label": "triage:question",
+      "color": "d876e3",
+      "description": "Jev classified this as a question",
+      "criteria": "A usage, configuration, or specification question."
+    },
+    "docs": {
+      "label": "triage:docs",
+      "color": "0075ca",
+      "description": "Jev classified this as a documentation issue",
+      "criteria": "A problem with documentation, examples, or instructions."
+    },
+    "other": {
+      "label": "triage:other",
+      "color": "cfd3d7",
+      "description": "Jev classified this as other",
+      "criteria": "Does not fit the other categories."
+    }
+  },
+  "severityLevels": {
+    "low": {
+      "order": 0,
+      "label": "severity:low",
+      "color": "cfd3d7",
+      "description": "Low severity",
+      "criteria": "Cosmetic issue or inconvenience with no meaningful impact."
+    },
+    "medium": {
+      "order": 1,
+      "label": "severity:medium",
+      "color": "fbca04",
+      "description": "Medium severity",
+      "criteria": "A limited feature is degraded, but a workaround exists."
+    },
+    "high": {
+      "order": 2,
+      "label": "severity:high",
+      "color": "d93f0b",
+      "description": "High severity",
+      "criteria": "A major feature is difficult or impossible to use."
+    },
+    "critical": {
+      "order": 3,
+      "label": "severity:critical",
+      "color": "b60205",
+      "description": "Critical severity",
+      "criteria": "Service outage, data loss, or a serious security problem."
+    }
+  },
+  "labels": {
+    "needsInvestigation": {
+      "label": "triage:needs-investigation",
+      "color": "fbca04",
+      "description": "Repository investigation is recommended"
+    },
+    "needsInformation": {
+      "label": "triage:needs-info",
+      "color": "fbca04",
+      "description": "More information is needed"
+    },
+    "flueRequested": {
+      "label": "triage:flue-requested",
+      "color": "7057ff",
+      "description": "Flue investigation was requested"
+    },
+    "flueDispatchFailed": {
+      "label": "triage:flue-dispatch-failed",
+      "color": "b60205",
+      "description": "Flue dispatch failed"
+    }
+  },
+  "questions": {
+    "issue_type": {
+      "type": "choice",
+      "instructions": "What kind of GitHub Issue is this?"
+    },
+    "severity": {
+      "type": "score",
+      "instructions": "How severe is the problem described by this Issue?"
+    },
+    "needs_repo_investigation": {
+      "type": "noul",
+      "instructions": "Is repository code investigation needed to triage this Issue confidently?",
+      "criteria": {
+        "true": "Inspecting code, tests, or repository history is needed.",
+        "false": "The Issue can be triaged from its text and existing metadata."
+      }
+    },
+    "has_enough_information": {
+      "type": "noul",
+      "instructions": "Does the Issue contain enough information to start triage?",
+      "criteria": {
+        "true": "The report has enough context, steps, or expected behavior to start.",
+        "false": "Important context or reproduction information is missing."
+      }
+    }
+  }
+}

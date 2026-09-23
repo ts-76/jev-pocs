@@ -1,0 +1,19 @@
+{
+  "name": "issue-triage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm triage:validate && tsc -p tsconfig.json",
+    "typecheck": "pnpm triage:validate && tsc --noEmit -p tsconfig.json",
+    "triage:validate": "tsx scripts/triage-cli.ts validate",
+    "triage:dry-run": "tsx scripts/triage-cli.ts dry-run",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "@types/node": "^26.6.2",
+    "tsx": "^4.20.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}

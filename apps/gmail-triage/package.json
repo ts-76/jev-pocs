@@ -1,0 +1,30 @@
+{
+  "name": "gmail-triage",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm rules:validate && pnpm exec wrangler deploy --dry-run --outdir dist",
+    "typecheck": "pnpm rules:prepare && pnpm exec wrangler types && tsc --noEmit",
+    "test": "pnpm rules:validate && vitest run",
+    "deploy": "pnpm rules:validate && pnpm exec wrangler deploy --keep-vars",
+    "deploy:first": "pnpm rules:validate && node scripts/deploy-first.mjs",
+    "deploy:check": "node scripts/check-deploy.mjs",
+    "dev": "pnpm rules:prepare && node scripts/dev.mjs",
+    "rules:prepare": "node scripts/prepare-rules.mjs",
+    "rules:generate": "node scripts/generate-rule-validator.mjs",
+    "rules:validate": "pnpm rules:prepare && node scripts/generate-rule-validator.mjs --check && tsx scripts/rules-cli.ts validate",
+    "rules:dry-run": "tsx scripts/rules-cli.ts dry-run"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "ajv": "^8.17.1",
+    "tsx": "^4.20.0",
+    "@cloudflare/workers-types": "^5.20260921.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1",
+    "wrangler": "^4.136.3"
+  },
+  "dependencies": {
+    "jose": "^6.2.12"
+  }
+}

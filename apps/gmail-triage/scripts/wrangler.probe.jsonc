@@ -1,0 +1,5 @@
+{
+  "name": "jev-gmail-triage-probe",
+  "compatibility_date": "2026-09-22",
+  "ai": { "binding": "AI", "remote": true }
+}

@@ -1,0 +1,17 @@
+# Local OAuth callback. This is a secret binding for production and differs there.
+GMAIL_CLIENT_ID=
+GMAIL_CLIENT_SECRET=
+GMAIL_REFRESH_TOKEN=
+GMAIL_REDIRECT_URI=http://localhost:8787/oauth/callback
+GMAIL_PUBSUB_TOPIC=projects/your-project/topics/your-topic
+OAUTH_STATE_SECRET=replace-with-a-long-random-value
+RUN_TOKEN=replace-with-a-long-random-value
+
+# Local runtime variables. scripts/dev.mjs passes these to Wrangler with --var.
+GMAIL_ACCOUNT_EMAIL=your-gmail-address@example.com
+PUBSUB_AUDIENCE=http://localhost:8787/pubsub
+PUBSUB_SERVICE_ACCOUNT_EMAIL=your-pubsub-push-service-account@your-project.iam.gserviceaccount.com
+MAILBOX_TIMEZONE=UTC
+
+# Used by local admin/check scripts only; not a Worker binding.
+WORKER_URL=http://localhost:8787

@@ -1,0 +1,17 @@
+{
+  "action": "opened",
+  "repository": {
+    "full_name": "owner/repository",
+    "html_url": "https://github.com/owner/repository",
+    "default_branch": "main"
+  },
+  "issue": {
+    "number": 123,
+    "title": "Example bug report",
+    "body": "The application returns an error when I save the settings.",
+    "html_url": "https://github.com/owner/repository/issues/123",
+    "updated_at": "2026-09-23T10:00:00Z",
+    "user": { "login": "example-user" },
+    "labels": []
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "model": "typesafe/jev",
+  "answers": {
+    "issue_type": { "type": "choice", "choice": "bug" },
+    "severity": { "type": "score", "score": 2.2 },
+    "needs_repo_investigation": { "type": "noul", "noul": 0.9 },
+    "has_enough_information": { "type": "noul", "noul": 0.8 }
+  }
+}

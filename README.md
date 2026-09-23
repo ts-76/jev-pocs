@@ -4,8 +4,8 @@ TypeSafe AI の Jev を「一次判断層」として使う、2つの個人向�
 
 必要環境は Node.js 22系（最新patch推奨）と pnpm 11.22.0 です。この手順は Node.js 22.0.0 でも検証しています。Gmail-triageを構築する場合はGoogle Cloud CLIも使います。
 
-- apps/gmail-triage: Gmail API を正本にして、認証付きPub/Sub通知と定期回収でメールを評価し、Gmail ラベルを付ける Cloudflare Worker
-- apps/issue-triage: GitHub Issue 作成・更新時に Jev で分類し、必要な Issue だけ Flue の調査エージェントへ渡す GitHub Actions 用 Node.js アプリ
+- [Gmail Triage PoC の README](apps/gmail-triage/README.md): Gmail API を正本にして、認証付きPub/Sub通知と定期回収でメールを評価し、Gmail ラベルを付ける Cloudflare Worker
+- [Issue Triage PoC の README](apps/issue-triage/README.md): GitHub Issue 作成・更新時に Jev で分類し、必要な Issue だけ Flue の調査エージェントへ渡す GitHub Actions 用 Node.js アプリ
 
 どちらも、Jev に副作用を持たせず、Jev の判定結果を TypeScript のルールで処理する構成です。
 
@@ -20,7 +20,7 @@ pnpm test
 pnpm build
 ~~~
 
-各アプリのセットアップ手順は、それぞれの README を参照してください。
+各アプリのセットアップ手順は、上記の [Gmail Triage README](apps/gmail-triage/README.md) または [Issue Triage README](apps/issue-triage/README.md) を参照してください。
 
 ## デプロイ
 
